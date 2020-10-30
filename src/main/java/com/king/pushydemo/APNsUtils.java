@@ -18,8 +18,8 @@ public class APNsUtils {
     private static ApnsClient apnsClient = null;
     public static void main(String[] args) throws Exception {
         //IOS等终端设备注册后返回的DeviceToken
-        String deviceToken ="426333051ace4aa9e3dbd27d24f99f15b7f73b5a3a6e092e89a57493ebcb66b8";
-//        String deviceToken = "74abd7d51c58a8db995fa53c3508a72481a9d4ad56e7ed1f7d12362f798a6906";
+        String deviceToken ="a4acab463ab55b9342d10abcf47787a6c6cb99881c2268dee312f001c86a2739";
+//     String deviceToken = "74abd7d51c58a8db995fa53c3508a72481a9d4ad56e7ed1f7d12362f798a6906";
         /**
          * Use the voip push type for notifications that provide information about an incoming Voice-over-IP (VoIP)
          * call. For more information, see Responding to VoIP Notifications from PushKit.
@@ -31,9 +31,9 @@ public class APNsUtils {
         //这是你的主题，大多数情况是bundleId，voip需要在bundleId加上.voip。对应文档中的apns-topic
         //此处可以参考https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
 
-        String topic = "com.chinaums.umschat2.voip";
-//        String topic = "com.chinaums.umschat2";
-        String payload = "{ \"aps\" : {\"alert\" : \"测试内容\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
+//        String topic = "com.chinaums.umschat2.voip";
+        String topic = "com.chinaums.umschat2";
+        String payload = "{ \"aps\" : {\"alert\" : \"sam测试\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
         //有效时间
         Date invalidationTime= new Date(System.currentTimeMillis() + 60 * 60 * 1000L );
         //发送策略 apns-priority 10为立即 5为省电
@@ -73,7 +73,7 @@ public class APNsUtils {
 //这边是VOIP推送
 
                 apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
-                        .setClientCredentials(new File("/Users/as/Desktop/umsChinaVoip.p12"),"123456")
+                        .setClientCredentials(new File("/Users/as/Desktop/apnstuisong.p12"),"123456")
                         .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
 
 //                EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
