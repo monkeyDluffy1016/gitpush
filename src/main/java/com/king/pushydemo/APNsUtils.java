@@ -31,9 +31,9 @@ public class APNsUtils {
         //这是你的主题，大多数情况是bundleId，voip需要在bundleId加上.voip。对应文档中的apns-topic
         //此处可以参考https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
 
-//        String topic = "com.chinaums.umschat2.voip";
-        String topic = "com.chinaums.umschat2";
-        String payload = "{ \"aps\" : {\"alert\" : \"我的打井\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
+        String topic = "com.chinaums.umschat2.voip";
+//        String topic = "com.chinaums.umschat2";
+        String payload = "{ \"aps\" : {\"alert\" : \"测试内容\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
         //有效时间
         Date invalidationTime= new Date(System.currentTimeMillis() + 60 * 60 * 1000L );
         //发送策略 apns-priority 10为立即 5为省电
@@ -61,22 +61,19 @@ public class APNsUtils {
 
         if (apnsClient == null) {
             try {
-                /**
-                 * Development server: api.sandbox.push.apple.com:443
-                 * Production server: api.push.apple.com:443
-                 *
-                 * api.development.push.apple.com这个域名苹果官网现在找不到了
-                 */
-                String SANDBOX_APNS_HOST = "api.sandbox.push.apple.com";
-//                /Users/liguoxin/Desktop/p12/deve_push.p12
-//                 /Users/liguoxin/Desktop/p12/distri_push.p12
-                //四个线程
+
+
                 EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
 //                注销掉  * api.development.push.apple.com这个域名苹果官网现在找不到了
 //                apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
+//这边是正常apns推送的代码
+//                apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
+//                        .setClientCredentials(new File("/Users/as/Desktop/apnstuisong.p12"),"123456")
+//                        .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
+//这边是VOIP推送
 
                 apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
-                        .setClientCredentials(new File("/Users/as/Desktop/apnstuisong.p12"),"123456")
+                        .setClientCredentials(new File("/Users/as/Desktop/umsChinaVoip.p12"),"123456")
                         .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
 
 //                EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
