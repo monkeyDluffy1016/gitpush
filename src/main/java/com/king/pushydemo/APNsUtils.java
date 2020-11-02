@@ -1,17 +1,15 @@
 package com.king.pushydemo;
-
 import com.turo.pushy.apns.*;
 import com.turo.pushy.apns.util.SimpleApnsPushNotification;
 import com.turo.pushy.apns.util.concurrent.PushNotificationFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-
+// 修改推送方式   VOIP
 
 @Slf4j
 public class APNsUtils {
@@ -31,8 +29,9 @@ public class APNsUtils {
         //这是你的主题，大多数情况是bundleId，voip需要在bundleId加上.voip。对应文档中的apns-topic
         //此处可以参考https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
 
-//        String topic = "com.chinaums.umschat2.voip";
-        String topic = "com.chinaums.umschat2";
+
+//        String topic = "com.xxxx.voip";
+        String topic = "com.xxxx";
         String payload = "{ \"aps\" : {\"alert\" : \"sam测试\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
         //有效时间
         Date invalidationTime= new Date(System.currentTimeMillis() + 60 * 60 * 1000L );
