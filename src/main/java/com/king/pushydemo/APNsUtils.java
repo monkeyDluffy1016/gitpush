@@ -64,14 +64,10 @@ public class APNsUtils {
 
         if (apnsClient == null) {
             try {
-
-
                 EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
-
                 apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
                         .setClientCredentials(new File("/Users/as/Desktop/apnstuisong.p12"),"123456")
                         .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
-
 
             } catch (Exception e) {
 //                log.error("ios get pushy apns client failed!");
