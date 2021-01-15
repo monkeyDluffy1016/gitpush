@@ -1,5 +1,5 @@
-# gitpush
-VOIP，APNS推送java   demo，用于测试使用  
+# APNS  VOIP推送 java版本 
+
 修改推送方式   使用VOIP的用这一句   String topic = "com.xxxx.voip";  
              使用APNS的用这一句   String topic = "com.xxxx";  
  设置token   String deviceToken ="a4acab463ab55b9342d10abcf47787a6c6cb99881c2268dee312f001c86a2739";  
