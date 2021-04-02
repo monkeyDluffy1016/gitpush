@@ -56,14 +56,11 @@ public class APNsUtils {
         //如果返回的消息中success为true那么成功，否则失败！
         //如果失败不必惊慌，rejectionReason字段中会有失败的原因。对应官网找到原因即可
         //https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns?language=objc
-<<<<<<< HEAD
 
-=======
 //
 //        haha
 //        branch1
 //        branch3
->>>>>>> 6ef95fc... 提交
         System.out.println("------------->"+response);
     }
 
