@@ -60,8 +60,14 @@ public class APNsUtils {
 //
 //        haha
 //        branch1
+<<<<<<< HEAD
 //        branch3
+=======
+
+//
+>>>>>>> 47d8937... 1分支上修改
         System.out.println("------------->"+response);
+//        1分支上修改
     }
 
     public static ApnsClient getAPNSConnect() {
