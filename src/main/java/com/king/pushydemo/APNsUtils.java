@@ -9,6 +9,10 @@ import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
+
+//修改12
+
+
 // 修改推送方式   使用VOIP的用这一句   String topic = "com.xxxx.voip";
 //              使用APNS的用这一句   String topic = "com.xxxx";
 //  设置token   String deviceToken ="a4acab463ab55b9342d10abcf47787a6c6cb99881c2268dee312f001c86a2739";
@@ -81,8 +85,6 @@ public class APNsUtils {
                 e.printStackTrace();
             }
         }
-
         return apnsClient;
-
     }
 }
