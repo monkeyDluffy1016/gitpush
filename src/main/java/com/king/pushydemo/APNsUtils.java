@@ -11,6 +11,7 @@ import java.util.UUID;
 
 
 //修改12
+//merge to branch1
 
 
 // 修改推送方式   使用VOIP的用这一句   String topic = "com.xxxx.voip";
