@@ -1,19 +1,19 @@
 package com.king.pushydemo;
 import com.turo.pushy.apns.*;
+import com.turo.pushy.apns.auth.ApnsSigningKey;
 import com.turo.pushy.apns.util.SimpleApnsPushNotification;
 import com.turo.pushy.apns.util.concurrent.PushNotificationFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-
 //修改12
 //merge to branch1
-
-
 // 修改推送方式   使用VOIP的用这一句   String topic = "com.xxxx.voip";
 //              使用APNS的用这一句   String topic = "com.xxxx";
 //  设置token   String deviceToken ="a4acab463ab55b9342d10abcf47787a6c6cb99881c2268dee312f001c86a2739";
@@ -28,7 +28,7 @@ public class APNsUtils {
     private static ApnsClient apnsClient = null;
     public static void main(String[] args) throws Exception {
         //IOS等终端设备注册后返回的DeviceToken
-        String deviceToken ="a4acab463ab55b9342d10abcf47787a6c6cb99881c2268dee312f001c86a2739";
+        String deviceToken ="00f5cda84fbca177c5d358e83c6fb47df2e8f2db726084cfcec8da5c30dbfd71";
         /**
          * Use the voip push type for notifications that provide information about an incoming Voice-over-IP (VoIP)
          * call. For more information, see Responding to VoIP Notifications from PushKit.
@@ -39,11 +39,9 @@ public class APNsUtils {
          */
         //这是你的主题，大多数情况是bundleId，voip需要在bundleId加上.voip。对应文档中的apns-topic
         //此处可以参考https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns?language=objc
-
-
 //        String topic = "com.xxxx.voip";
-        String topic = "com.xxxx";
-        String payload = "{ \"aps\" : {\"alert\" : \"sam测试\", \"sound\" : \"default\", \"badge\" :1},\"liguoxin\":\"liguoxin\" }";
+        String topic = "com.CN.xxx";
+        String payload = "{ \"aps\" : {\"alert\" : \"sam测试111refedfda\", \"sound\" : \"default\", \"badge\" :3033},\"liguoxin\":\"liguoxin\" }";
         //有效时间
         Date invalidationTime= new Date(System.currentTimeMillis() + 60 * 60 * 1000L );
         //发送策略 apns-priority 10为立即 5为省电
@@ -55,7 +53,14 @@ public class APNsUtils {
         //构造一个APNs的推送消息实体
         SimpleApnsPushNotification msg = new SimpleApnsPushNotification(deviceToken,topic,payload);
         //开始推送
-        PushNotificationFuture<SimpleApnsPushNotification, PushNotificationResponse<SimpleApnsPushNotification>> future = getAPNSConnect().sendNotification(msg);
+//p12  z证书的推送
+        PushNotificationFuture<SimpleApnsPushNotification, PushNotificationResponse<SimpleApnsPushNotification>> future = APNsUtils.getAPNSConnect().sendNotification(msg);
+
+//这边是p8证书的使用
+//        PushNotificationFuture<SimpleApnsPushNotification, PushNotificationResponse<SimpleApnsPushNotification>> future =
+//                APNSConnect.getAPNSConnect().sendNotification(msg);
+
+
         PushNotificationResponse<SimpleApnsPushNotification> response = future.get();
         System.out.println(response.getRejectionReason());
         //如果返回的消息中success为true那么成功，否则失败！
@@ -65,20 +70,17 @@ public class APNsUtils {
 //
 //        haha
 //        branch1
-
-//
         System.out.println("------------->"+response);
 //        1分支上修改
     }
-    // cherry pick
 
+//    这边是P12的证书使用
     public static ApnsClient getAPNSConnect() {
-
         if (apnsClient == null) {
             try {
                 EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
-                apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
-                        .setClientCredentials(new File("/Users/as/Desktop/apnstuisong.p12"),"123456")
+                apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
+                        .setClientCredentials(new File("/Users/as/Desktop/test_voip_server.p12"),"china")
                         .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
 
             } catch (Exception e) {
@@ -89,4 +91,36 @@ public class APNsUtils {
         }
         return apnsClient;
     }
+
+
+//    这个是P8证书
+//    public static class APNSConnect {
+//
+//        private static final Logger logger = LoggerFactory.getLogger(APNSConnect.class);
+//
+//        private static ApnsClient apnsClient = null;
+//
+//        public static ApnsClient getAPNSConnect() {
+//
+//            if (apnsClient == null) {
+//                try {
+//                    EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
+//                    apnsClient = new ApnsClientBuilder().setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
+//                            .setSigningKey(ApnsSigningKey.loadFromPkcs8File(new File("/Users/as/Desktop/APN.p8"),
+//                                    "4URW8PS6WP", "GN4J2TX963"))
+//                            .setConcurrentConnections(4).setEventLoopGroup(eventLoopGroup).build();
+//                } catch (Exception e) {
+//                    logger.error("ios get pushy apns client failed!");
+//                    e.printStackTrace();
+//                }
+//            }
+//            return apnsClient;
+//        }
+//
+//    }
+
+    
+
+
+
 }
